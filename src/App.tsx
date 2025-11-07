@@ -12,8 +12,10 @@ function App() {
         {/* Canvas de fondo con partículas animadas */}
         <StarfieldCanvas />
         
-        {/* Cursor personalizado */}
-        <CursorFollower />
+        {/* Cursor personalizado - solo en desktop */}
+        <div className="hidden lg:block">
+          <CursorFollower />
+        </div>
         
         <div className="relative z-10">
           <Navigation />

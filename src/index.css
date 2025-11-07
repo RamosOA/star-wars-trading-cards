@@ -1,0 +1,1537 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Paleta de colores  */
+:root {
+  --panini-primary: #E91E63;     /* Rosa más suave */
+  --panini-secondary: #FFC107;   /* Amarillo más legible */
+  --panini-accent: #2196F3;      /* Azul más accesible */
+  --panini-success: #4CAF50;     /* Verde estándar */
+  --panini-warning: #FF9800;     /* Naranja balanceado */
+  --panini-bg-dark: #1A1A2E;     /* Fondo principal oscuro */
+  --panini-bg-medium: #16213E;   /* Fondo medio */
+  --panini-bg-light: #0F3460;    /* Fondo claro */
+  --panini-text: #FFFFFF;        /* Texto principal blanco */
+  --panini-text-secondary: #E0E0E0; /* Texto secundario gris claro */
+  --panini-text-muted: #9E9E9E;  /* Texto atenuado */
+  --panini-border: #3F51B5;      /* Borde azul suave */
+  --panini-glow: rgba(33, 150, 243, 0.4); /* Glow más sutil */
+  --panini-card-bg: #2A2A40;     /* Fondo de tarjetas */
+  --panini-hover: rgba(233, 30, 99, 0.1); /* Efecto hover sutil */
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  
+  /* Prevenir desbordamiento horizontal global */
+  html {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+  }
+  
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Exo 2', sans-serif;
+    background: var(--panini-bg-dark);
+    color: var(--panini-text);
+    overflow-x: hidden;
+    position: relative;
+    cursor: none; /* Ocultar cursor predeterminado */
+    width: 100%;
+    max-width: 100vw;
+  }
+
+  /* Mostrar cursor predeterminado en elementos específicos */
+  input, textarea, select {
+    cursor: text !important;
+  }
+
+  button {
+    cursor: pointer !important;
+  }
+  
+  /* Asegurar que el contenedor principal no tenga desbordamiento */
+  #root {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  /* Fondo espacial manejado por canvas - CSS anterior removido para mejor performance */
+}
+
+/* Animaciones existentes */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+@keyframes drift {
+  0% { transform: translateX(-100px); }
+  100% { transform: translateX(100px); }
+}
+
+@keyframes shootingStar {
+  0% {
+    transform: translateX(-100vw) translateY(-100vh) rotate(45deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100vw) translateY(100vh) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+/* Animaciones mejoradas para cartas con imágenes */
+@keyframes hologram {
+  0%, 100% { 
+    opacity: 0.8;
+    transform: translateY(0px);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes specialGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(251, 191, 36, 0.8), 0 0 40px rgba(251, 191, 36, 0.3);
+  }
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(50px) rotateX(90deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
+}
+
+@keyframes geometricPattern {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+@keyframes dataStream {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes energyPulse {
+  0%, 100% {
+    box-shadow: 0 0 5px currentColor;
+  }
+  50% {
+    box-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
+  }
+}
+
+@keyframes spin-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(255, 232, 31, 0.5); }
+  50% { box-shadow: 0 0 20px rgba(255, 232, 31, 0.8), 0 0 30px rgba(255, 232, 31, 0.6); }
+}
+
+@keyframes hologram {
+  0%, 100% { 
+    opacity: 1;
+    filter: brightness(1) contrast(1);
+  }
+  50% { 
+    opacity: 0.8;
+    filter: brightness(1.1) contrast(1.2);
+  }
+}
+
+@keyframes card-entrance {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) rotateX(15deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+  }
+}
+
+@keyframes force-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@layer components {
+  /* Tipografía Star Wars */
+  .font-star-wars {
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .font-body {
+    font-family: 'Exo 2', sans-serif;
+  }
+
+  /* Efectos de texto */
+  .text-glow {
+    text-shadow: 0 0 10px rgba(255, 232, 31, 0.8),
+                 0 0 20px rgba(255, 232, 31, 0.6),
+                 0 0 30px rgba(255, 232, 31, 0.4);
+  }
+
+  .text-blue-glow {
+    color: #00bfff;
+    text-shadow: 0 0 10px rgba(0, 191, 255, 0.8),
+                 0 0 20px rgba(0, 191, 255, 0.6);
+  }
+
+  /* Tarjetas especiales con efecto holográfico */
+  .card-special {
+    background: linear-gradient(135deg, 
+      #FFE81F 0%, 
+      #ffd700 25%, 
+      #FFE81F 50%, 
+      #ffcc00 75%, 
+      #FFE81F 100%);
+    border: 2px solid #FFE81F;
+    box-shadow: 
+      0 0 15px rgba(255, 232, 31, 0.6),
+      inset 0 0 15px rgba(255, 255, 255, 0.2);
+    animation: glow 3s ease-in-out infinite;
+    color: #000;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-special::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, 
+      transparent 30%, 
+      rgba(255, 255, 255, 0.3) 50%, 
+      transparent 70%);
+    transform: rotate(45deg);
+    animation: hologram 4s linear infinite;
+  }
+
+  /* Tarjetas regulares con efecto metálico */
+  .card-regular {
+    background: linear-gradient(135deg, 
+      #4a5568 0%, 
+      #2d3748 25%, 
+      #1a202c 50%, 
+      #2d3748 75%, 
+      #4a5568 100%);
+    border: 1px solid #718096;
+    box-shadow: 
+      0 4px 15px rgba(0, 0, 0, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+  }
+
+  /* Sobres con efecto de energía */
+  .envelope-available {
+    background: linear-gradient(135deg, 
+      #1e3a8a 0%, 
+      #1e40af 25%, 
+      #2563eb 50%, 
+      #3b82f6 75%, 
+      #60a5fa 100%);
+    border: 2px solid #3b82f6;
+    box-shadow: 
+      0 0 20px rgba(59, 130, 246, 0.5),
+      0 8px 25px rgba(0, 0, 0, 0.4);
+    animation: force-pulse 2s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .envelope-available::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(255, 255, 255, 0.4), 
+      transparent);
+    transition: left 0.5s;
+  }
+
+  .envelope-available:hover::after {
+    left: 100%;
+  }
+
+  .envelope-cooldown {
+    background: linear-gradient(135deg, 
+      #374151 0%, 
+      #4b5563 25%, 
+      #6b7280 50%, 
+      #4b5563 75%, 
+      #374151 100%);
+    border: 1px solid #6b7280;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+  /* Efectos de entrada para cartas */
+  .card-entrance {
+    animation: card-entrance 0.6s ease-out forwards;
+  }
+
+  /* Navegación con tema Star Wars */
+  .nav-star-wars {
+    background: linear-gradient(90deg, 
+      rgba(0, 0, 0, 0.95) 0%, 
+      rgba(30, 58, 138, 0.9) 50%, 
+      rgba(0, 0, 0, 0.95) 100%);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid #FFE81F;
+    width: 100%;
+  }
+
+
+
+  /* Botones con efectos de la Fuerza */
+  .btn-primary {
+    background: linear-gradient(135deg, #FFE81F 0%, #ffd700 100%);
+    color: #000;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 232, 31, 0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 232, 31, 0.5);
+    background: linear-gradient(135deg, #ffd700 0%, #FFE81F 100%);
+  }
+
+  .btn-secondary {
+    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+    color: #fff;
+    border: 1px solid #dc2626;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+  }
+
+  /* Modal con efecto holográfico */
+  .modal-backdrop {
+    background: rgba(0, 0, 0, 0.85);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+  }
+
+  .modal-content {
+    background: linear-gradient(135deg, 
+      rgba(30, 58, 138, 0.95) 0%, 
+      rgba(0, 0, 0, 0.95) 50%, 
+      rgba(30, 58, 138, 0.95) 100%);
+    border: 1px solid #FFE81F;
+    box-shadow: 
+      0 0 30px rgba(255, 232, 31, 0.3),
+      0 25px 50px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Barras de progreso con efecto de sable láser */
+  .progress-bar {
+    background: linear-gradient(90deg, 
+      #FFE81F 0%, 
+      #00bfff 50%, 
+      #FFE81F 100%);
+    box-shadow: 
+      0 0 10px rgba(255, 232, 31, 0.6),
+      0 0 20px rgba(0, 191, 255, 0.4);
+    animation: glow 2s ease-in-out infinite;
+  }
+
+  /* Estilos de cartas mejorados sin imágenes */
+  .card-special {
+    background: linear-gradient(135deg, 
+      rgba(255, 215, 0, 0.15) 0%, 
+      rgba(255, 140, 0, 0.15) 25%, 
+      rgba(255, 69, 0, 0.15) 50%, 
+      rgba(255, 215, 0, 0.15) 75%, 
+      rgba(255, 255, 0, 0.15) 100%
+    );
+    border: 2px solid #ffd700;
+    box-shadow: 
+      0 0 25px rgba(255, 215, 0, 0.4),
+      0 0 50px rgba(255, 215, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-special::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+    animation: energyPulse 3s ease-in-out infinite;
+  }
+
+  .card-regular {
+    background: linear-gradient(135deg, 
+      rgba(59, 130, 246, 0.08) 0%, 
+      rgba(37, 99, 235, 0.08) 50%, 
+      rgba(29, 78, 216, 0.08) 100%
+    );
+    border: 2px solid rgba(59, 130, 246, 0.4);
+    box-shadow: 
+      0 8px 16px rgba(0, 0, 0, 0.3),
+      0 0 20px rgba(59, 130, 246, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-regular::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+    animation: hologram 4s ease-in-out infinite;
+  }
+
+  /* Efectos especiales para patrones geométricos */
+  .pattern-movie {
+    background-image: 
+      repeating-linear-gradient(45deg, rgba(255, 215, 0, 0.1) 0px, rgba(255, 215, 0, 0.1) 2px, transparent 2px, transparent 12px),
+      radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.05) 30%, transparent 31%);
+  }
+
+  .pattern-character {
+    background-image: 
+      repeating-linear-gradient(90deg, rgba(59, 130, 246, 0.1) 0px, rgba(59, 130, 246, 0.1) 1px, transparent 1px, transparent 15px),
+      repeating-linear-gradient(0deg, rgba(59, 130, 246, 0.1) 0px, rgba(59, 130, 246, 0.1) 1px, transparent 1px, transparent 15px);
+  }
+
+  .pattern-starship {
+    background-image: 
+      linear-gradient(45deg, transparent 40%, rgba(156, 163, 175, 0.1) 50%, transparent 60%),
+      repeating-conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(156, 163, 175, 0.05) 60deg, transparent 120deg);
+  }
+
+  /* Utilidades adicionales */
+  .animate-spin-slow {
+    animation: spin-slow 8s linear infinite;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 10px currentColor;
+  }
+
+  .blue-glow {
+    color: #60a5fa;
+    text-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+  }
+
+  /* Canvas de estrellas */
+  .starfield-canvas {
+    background: #000000;
+  }
+
+  /* Cursor personalizado optimizado */
+  .cursor-main {
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out;
+  }
+
+  .cursor-main.cursor-clicking {
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+
+  .cursor-ring {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--panini-accent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 12px var(--panini-glow), 0 0 24px var(--panini-accent);
+    transition: all 0.2s ease-out;
+  }
+
+  .cursor-clicking .cursor-ring {
+    width: 32px;
+    height: 32px;
+    border-color: var(--panini-primary);
+    box-shadow: 0 0 18px var(--panini-primary), 0 0 30px var(--panini-accent);
+  }
+
+  .cursor-dot {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: linear-gradient(45deg, var(--panini-secondary), var(--panini-accent));
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 8px var(--panini-secondary), 0 0 16px var(--panini-accent);
+    transition: all 0.2s ease-out;
+  }
+
+  .cursor-clicking .cursor-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--panini-text);
+    box-shadow: 0 0 12px var(--panini-text), 0 0 20px var(--panini-primary);
+  }
+}
+
+/* Estilos Panini - Trading Cards */
+@layer components {
+  .panini-card {
+    background: var(--panini-card-bg);
+    border: 1px solid var(--panini-border);
+    border-radius: 12px;
+    box-shadow: 
+      0 4px 12px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .panini-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 
+      0 8px 25px rgba(0, 0, 0, 0.2),
+      0 0 15px var(--panini-glow),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, var(--panini-card-bg), var(--panini-bg-light));
+  }
+
+  .panini-button {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    background: linear-gradient(135deg, var(--panini-primary), var(--panini-accent));
+    color: var(--panini-text);
+    border: 1px solid var(--panini-border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+
+  .panini-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, 
+      color-mix(in srgb, var(--panini-primary) 90%, white),
+      color-mix(in srgb, var(--panini-accent) 90%, white)
+    );
+  }
+
+  .panini-progress {
+    background: linear-gradient(90deg, 
+      var(--panini-success) 0%, 
+      var(--panini-secondary) 50%, 
+      var(--panini-accent) 100%);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+
+  .panini-glow-text {
+    color: var(--panini-accent);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    font-weight: 600;
+  }
+
+  .panini-title {
+    color: var(--panini-text);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .panini-text-muted {
+    color: var(--panini-text-muted);
+  }
+
+  .panini-text-secondary {
+    color: var(--panini-text-secondary);
+  }
+
+  /* Clases utilitarias para colores de fondo */
+  .bg-panini-primary { background-color: var(--panini-primary); }
+  .bg-panini-secondary { background-color: var(--panini-secondary); }
+  .bg-panini-accent { background-color: var(--panini-accent); }
+  .bg-panini-success { background-color: var(--panini-success); }
+  
+  /* Clases utilitarias para bordes */
+  .border-panini-primary { border-color: var(--panini-primary); }
+  .border-panini-secondary { border-color: var(--panini-secondary); }
+  .border-panini-accent { border-color: var(--panini-accent); }
+  
+  /* Efectos de glow suaves */
+  .panini-container {
+    background: rgba(42, 42, 64, 0.9);
+    border: 1px solid var(--panini-border);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Clases utilitarias para colores de fondo */
+  .bg-panini-primary { background-color: var(--panini-primary); }
+  .bg-panini-secondary { background-color: var(--panini-secondary); }
+  .bg-panini-accent { background-color: var(--panini-accent); }
+  .bg-panini-success { background-color: var(--panini-success); }
+  
+  /* Clases utilitarias para bordes */
+  .border-panini-primary { border-color: var(--panini-primary); }
+  .border-panini-secondary { border-color: var(--panini-secondary); }
+  .border-panini-accent { border-color: var(--panini-accent); }
+  
+  /* Efectos de glow suaves */
+  .glow-primary { box-shadow: 0 0 15px rgba(233, 30, 99, 0.3); }
+  .glow-secondary { box-shadow: 0 0 15px rgba(255, 193, 7, 0.3); }
+  .glow-accent { box-shadow: 0 0 15px rgba(33, 150, 243, 0.3); }
+
+  /* Spinner personalizado */
+  .panini-spinner {
+    border-top-color: var(--panini-primary);
+    border-right-color: var(--panini-secondary);
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  }
+
+  /* Clases para accesibilidad mejoradas */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Estilos de foco mejorados para accesibilidad */
+  .focus-accessible:focus {
+    outline: 3px solid var(--panini-secondary);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px var(--panini-bg-dark), 0 0 0 5px var(--panini-secondary);
+  }
+
+  /* Contraste mejorado para textos */
+  .text-accessible {
+    color: var(--panini-text);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  }
+
+  .text-accessible-muted {
+    color: var(--panini-text-secondary);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+  }
+
+  /* Barras de progreso accesibles */
+  .progress-accessible {
+    background: linear-gradient(90deg, var(--panini-primary), var(--panini-secondary));
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Estilos específicos para cartas mejoradas */
+  .card-regular {
+    background: linear-gradient(135deg, 
+      rgba(30, 41, 59, 0.95) 0%,
+      rgba(51, 65, 85, 0.90) 50%,
+      rgba(30, 41, 59, 0.95) 100%);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    box-shadow: 
+      0 10px 25px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-regular:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+
+  .card-special {
+    background: linear-gradient(135deg, 
+      rgba(120, 53, 15, 0.95) 0%,
+      rgba(146, 64, 14, 0.90) 25%,
+      rgba(217, 119, 6, 0.85) 50%,
+      rgba(146, 64, 14, 0.90) 75%,
+      rgba(120, 53, 15, 0.95) 100%);
+    border: 2px solid rgba(251, 191, 36, 0.6);
+    box-shadow: 
+      0 0 30px rgba(251, 191, 36, 0.4),
+      0 15px 35px rgba(0, 0, 0, 0.7),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    animation: specialGlow 3s ease-in-out infinite;
+    position: relative;
+  }
+
+  .card-special:hover {
+    transform: translateY(-12px) scale(1.05) rotateY(5deg);
+    box-shadow: 
+      0 0 50px rgba(251, 191, 36, 0.6),
+      0 25px 50px rgba(0, 0, 0, 0.8);
+    animation-duration: 1.5s;
+  }
+
+  .card-special::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+      rgba(251, 191, 36, 0.8), 
+      rgba(245, 158, 11, 0.8), 
+      rgba(251, 191, 36, 0.8));
+    z-index: -1;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .card-special:hover::before {
+    opacity: 1;
+  }
+
+  .card-entrance {
+    animation: cardEntrance 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .geometric-pattern {
+    background-image: 
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255,255,255,0.03) 10px,
+        rgba(255,255,255,0.03) 20px
+      ),
+      radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 2px, transparent 2px),
+      radial-gradient(circle at 70% 70%, rgba(255,255,255,0.1) 2px, transparent 2px);
+    background-size: 40px 40px, 25px 25px, 25px 25px;
+    animation: geometricPattern 10s linear infinite;
+  }
+
+  .special-glow {
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+  }
+
+  .special-glow:hover {
+    box-shadow: 0 0 40px rgba(251, 191, 36, 0.8);
+  }
+
+  /* Brillo específico para cartas especiales */
+  .special-card-glow {
+    background: radial-gradient(circle at 50% 50%, rgba(251, 191, 36, 0.6) 0%, transparent 70%);
+  }
+
+  /* Efectos de texto brillante */
+  .text-glow {
+    text-shadow: 0 0 10px currentColor;
+  }
+
+  /* Animación principal de revelado de cartas */
+  .card-reveal-animation {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    animation: cardRevealStagger 0.6s ease-out forwards;
+  }
+
+  @keyframes cardRevealStagger {
+    0% {
+      opacity: 0;
+      transform: translateY(20px) scale(0.95);
+    }
+    60% {
+      opacity: 0.8;
+      transform: translateY(5px) scale(0.98);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* Estados de carga mejorados */
+  .card-loading-container {
+    background: linear-gradient(135deg, 
+      rgba(30, 41, 59, 0.95) 0%,
+      rgba(51, 65, 85, 0.90) 50%,
+      rgba(30, 41, 59, 0.95) 100%);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    border-radius: 12px;
+    padding: 1.5rem;
+    aspect-ratio: 3/4;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    flex-shrink: 0;
+  }
+
+  .loading-spinner-primary {
+    width: 56px;
+    height: 56px;
+    border: 4px solid transparent;
+    border-top-color: var(--panini-primary);
+    border-right-color: var(--panini-secondary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+  }
+
+  .loading-spinner-secondary {
+    position: absolute;
+    inset: 0;
+    width: 56px;
+    height: 56px;
+    border: 4px solid var(--panini-accent);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+    margin: 0 auto;
+  }
+
+  .loading-text-primary {
+    color: var(--panini-text-secondary);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.875rem;
+    font-weight: bold;
+    margin-top: 1rem;
+  }
+
+  .loading-text-secondary {
+    color: var(--panini-text-muted);
+    font-family: 'Exo 2', sans-serif;
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .loading-progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(148, 163, 184, 0.2);
+    border-radius: 2px;
+    margin-top: 1rem;
+    overflow: hidden;
+  }
+
+  .loading-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--panini-primary), var(--panini-accent));
+    border-radius: 2px;
+    transition: width 0.3s ease;
+    animation: progressPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes progressPulse {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+  }
+
+  /* Estados de error mejorados */
+  .card-error-container {
+    background: linear-gradient(135deg, 
+      rgba(60, 14, 14, 0.95) 0%,
+      rgba(85, 25, 25, 0.90) 50%,
+      rgba(60, 14, 14, 0.95) 100%);
+    border: 2px solid rgba(239, 68, 68, 0.6);
+    border-radius: 12px;
+    padding: 1.5rem;
+    aspect-ratio: 3/4;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+    flex-shrink: 0;
+  }
+
+  .error-icon-container {
+    filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.5));
+  }
+
+  .error-retry-button {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+  }
+
+  .error-retry-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+  }
+
+  .error-retry-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* Animaciones de feedback para acciones de carta */
+  .card-added-animation {
+    animation: cardAddedSuccess 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation-fill-mode: both;
+  }
+
+  @keyframes cardAddedSuccess {
+    0% { 
+      transform: scale(1) rotate(0deg);
+      box-shadow: 0 0 0 rgba(34, 197, 94, 0);
+      filter: brightness(1) saturate(1);
+    }
+    15% { 
+      transform: scale(1.05) rotate(0.5deg);
+      box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+      filter: brightness(1.1) saturate(1.2);
+    }
+    35% { 
+      transform: scale(1.15) rotate(-0.8deg);
+      box-shadow: 0 0 30px rgba(34, 197, 94, 0.8);
+      filter: brightness(1.2) saturate(1.4);
+    }
+    55% { 
+      transform: scale(1.12) rotate(0.3deg);
+      box-shadow: 0 0 40px rgba(34, 197, 94, 1);
+      filter: brightness(1.15) saturate(1.3);
+    }
+    75% { 
+      transform: scale(1.08) rotate(-0.2deg);
+      box-shadow: 0 0 35px rgba(34, 197, 94, 0.7);
+      filter: brightness(1.1) saturate(1.1);
+    }
+    90% { 
+      transform: scale(1.02) rotate(0.1deg);
+      box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+      filter: brightness(1.05) saturate(1.05);
+    }
+    100% { 
+      transform: scale(1) rotate(0deg);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);
+      filter: brightness(1) saturate(1);
+    }
+  }
+
+  .card-discarded-animation {
+    animation: cardDiscarded 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    animation-fill-mode: both;
+  }
+
+  @keyframes cardDiscarded {
+    0% { 
+      transform: scale(1) rotate(0deg);
+      opacity: 1;
+      filter: grayscale(0) brightness(1);
+    }
+    30% { 
+      transform: scale(0.92) rotate(-1.5deg);
+      opacity: 0.7;
+      filter: grayscale(0.4) brightness(0.8);
+    }
+    60% { 
+      transform: scale(0.88) rotate(1deg);
+      opacity: 0.5;
+      filter: grayscale(0.7) brightness(0.6);
+    }
+    80% { 
+      transform: scale(0.95) rotate(-0.5deg);
+      opacity: 0.8;
+      filter: grayscale(0.3) brightness(0.9);
+    }
+    100% { 
+      transform: scale(1) rotate(0deg);
+      opacity: 1;
+      filter: grayscale(0) brightness(1);
+    }
+  }
+
+  /* Mejoras en el botón de cerrar transmisión */
+  .close-transmission-button {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    border: 2px solid rgba(239, 68, 68, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2);
+  }
+
+  .close-transmission-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+    border-color: rgba(239, 68, 68, 0.6);
+  }
+
+  /* Efectos de procesamiento de datos galácticos */
+  .processing-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .processing-dot-1 {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--panini-primary);
+    animation: bounce 1s infinite;
+  }
+
+  .processing-dot-2 {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--panini-accent);
+    animation: bounce 1s infinite;
+    animation-delay: 200ms;
+  }
+
+  .processing-dot-3 {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--panini-secondary);
+    animation: bounce 1s infinite;
+    animation-delay: 400ms;
+  }
+
+  /* NAVEGACIÓN RESPONSIVA Y MENÚ HAMBURGUESA */
+  
+  /* Línea decorativa de navegación */
+  .nav-decorative-line {
+    display: none; /* Ocultar temporalmente para eliminar la barra lateral */
+  }
+
+  /* Animación staggered personalizable */
+  .staggered-animation[data-animation-delay="0"] { animation-delay: 0ms; }
+  .staggered-animation[data-animation-delay="100"] { animation-delay: 100ms; }
+  .staggered-animation[data-animation-delay="200"] { animation-delay: 200ms; }
+  .staggered-animation[data-animation-delay="300"] { animation-delay: 300ms; }
+  .staggered-animation[data-animation-delay="400"] { animation-delay: 400ms; }
+
+  /* Clases de progreso */
+  .progress-20 { width: 20%; }
+  .progress-40 { width: 40%; }
+  .progress-60 { width: 60%; }
+  .progress-80 { width: 80%; }
+  .progress-100 { width: 100%; }
+
+  /* Contenedor del menú móvil */
+  .mobile-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    transform-origin: top;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+
+  .mobile-menu-closed {
+    transform: scaleY(0);
+    opacity: 0;
+    pointer-events: none;
+    max-height: 0;
+  }
+
+  .mobile-menu-open {
+    transform: scaleY(1);
+    opacity: 1;
+    pointer-events: auto;
+    max-height: 300px;
+  }
+
+  /* Botón hamburguesa */
+  .hamburger-button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hamburger-icon {
+    width: 20px;
+    height: 16px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .hamburger-line {
+    width: 100%;
+    height: 2px;
+    background-color: currentColor;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transform-origin: center;
+  }
+
+  .hamburger-line-1-active {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .hamburger-line-2-active {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .hamburger-line-3-active {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Mejoras en el grid de cartas */
+  @media (min-width: 768px) {
+    .grid-cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      max-width: 100%;
+      padding: 0 1rem;
+    }
+  }
+
+  /* Asegurar que las tarjetas mantengan proporciones correctas */
+  .card-container {
+    width: 100%;
+    max-width: 280px;
+    aspect-ratio: 3/4;
+    margin: 0 auto;
+  }
+
+  /* Optimización para botones de acción */
+  .card-action-buttons {
+    position: sticky;
+    bottom: 0;
+    background: inherit;
+    padding-top: 0.5rem;
+    z-index: 10;
+  }
+
+  /* Grid responsive para evitar superposición */
+  .cards-grid-responsive {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    justify-items: center;
+    align-items: start;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+
+  .cards-grid-responsive > * {
+    width: 100%;
+    max-width: 280px;
+    min-height: 0;
+  }
+
+  /* CLASES PARA REEMPLAZAR ESTILOS INLINE */
+  
+  /* Elementos de carga con colores dinámicos */
+  .loading-element-primary {
+    background-color: var(--panini-primary);
+  }
+
+  .loading-element-accent {
+    background-color: var(--panini-accent);
+  }
+
+  .loading-element-secondary {
+    background-color: var(--panini-secondary);
+  }
+
+  .progress-bar {
+    width: var(--progress-width, 0%);
+  }
+
+  .staggered-animation {
+    animation-delay: var(--animation-delay, 0ms);
+    animation-fill-mode: both;
+  }
+
+  .progress-fill {
+    width: var(--fill-width, 0%);
+  }
+
+  /* Animaciones suaves mejoradas */
+  .smooth-transition {
+    transition: all 0.2s ease-out;
+  }
+
+  .smooth-transform {
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  }
+
+  .smooth-hover:hover {
+    transform: translateY(-1px) scale(1.01);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+  }
+
+  .album-card-hover {
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .album-card-hover:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Animaciones específicas para botones */
+  .btn-smooth {
+    transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+  }
+
+  .btn-smooth:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-smooth:active {
+    transform: translateY(0px);
+    transition-duration: 0.1s;
+  }
+
+  /* Corrige las barras de progreso para que usen la variable */
+  .progress-bar.progress-fill {
+    width: var(--fill-width, 0%);
+  }
+
+  /* Contenedores de información con gradientes */
+  .info-container-gradient {
+    background: linear-gradient(135deg, rgba(0, 204, 255, 0.05), transparent, rgba(255, 215, 0, 0.05));
+  }
+
+  /* Elementos giratorios decorativos */
+  .rotating-element-1 {
+    border-color: var(--panini-secondary);
+    border-style: solid;
+    border-width: 3px;
+    transform: rotate(45deg);
+    animation: spin 2s linear infinite;
+    box-shadow: 0 0 15px var(--panini-glow);
+  }
+
+  .rotating-element-2 {
+    border-color: var(--panini-secondary);
+    border-style: solid;
+    border-width: 3px;
+    transform: rotate(45deg);
+    animation: spin 2s linear infinite reverse;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+  }
+
+  /* Contenedores con bordes dinámicos */
+  .dynamic-border-container {
+    border-color: var(--panini-border);
+    box-shadow: 0 0 30px var(--panini-glow), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* RESPONSIVE DESIGN MEJORADO */
+  
+  /* Base mobile-first */
+  @media (max-width: 480px) {
+    .cards-grid-responsive {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      padding: 0 0.5rem;
+    }
+    
+    .card-container, .card-loading-container, .card-error-container {
+      max-width: 100%;
+    }
+
+    /* Texto responsivo */
+    h1 { font-size: 1.5rem !important; }
+    h2 { font-size: 1.25rem !important; }
+    h3 { font-size: 1.1rem !important; }
+    
+    /* Navegación más compacta en móviles */
+    .nav-star-wars .max-w-7xl {
+      padding: 0 0.75rem;
+    }
+
+    /* Páginas más compactas en móvil */
+    main {
+      padding: 1rem 0.5rem !important;
+    }
+
+    .max-w-7xl {
+      padding: 0 0.75rem;
+    }
+
+    /* Botones más pequeños en móvil */
+    .btn-primary, .error-retry-button {
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+    }
+
+    /* Cards de álbum más compactas */
+    .aspect-card {
+      aspect-ratio: 4/5;
+    }
+    
+    /* Cartas del álbum pequeñas en móvil */
+    .album-card {
+      width: 100%;
+      max-width: 120px;
+      min-height: 110px;
+    }
+    
+    /* Navegación responsiva para móviles - HORIZONTAL */
+    .nav-star-wars {
+      display: flex;
+      flex-direction: row;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      gap: 0.5rem;
+      padding: 0.75rem;
+      width: 100%;
+      margin: 0 auto;
+    }
+    
+    .nav-star-wars::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .nav-star-wars button {
+      flex-shrink: 0;
+      padding: 0.75rem 1rem;
+      font-size: 0.75rem;
+      text-align: center;
+      min-width: 90px;
+      white-space: nowrap;
+    }
+    
+    /* Grid específico para álbum en móvil */
+    .album-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      justify-items: center;
+    }
+  }
+
+  /* Tablets pequeñas */
+  @media (min-width: 481px) and (max-width: 768px) {
+    .cards-grid-responsive {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.875rem;
+      padding: 0 0.75rem;
+    }
+
+    /* Ajustes para tablets */
+    main {
+      padding: 1.5rem 1rem !important;
+    }
+
+    h1 { font-size: 1.75rem !important; }
+    h2 { font-size: 1.5rem !important; }
+    
+    /* Cartas del álbum más grandes en tablet */
+    .album-card {
+      max-width: 140px;
+      min-height: 130px;
+    }
+    
+    /* Navegación responsive para tablets */
+    .nav-star-wars {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem;
+    }
+    
+    .nav-star-wars button {
+      padding: 0.75rem 1.5rem;
+      font-size: 0.8rem;
+      min-width: 80px;
+    }
+  }
+
+  /* Tablets grandes */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .cards-grid-responsive {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      padding: 0 1rem;
+    }
+    
+    /* Cartas del álbum más grandes */
+    .album-card {
+      max-width: 160px;
+      min-height: 150px;
+    }
+    
+    /* Navegación con scroll horizontal si es necesario */
+    .nav-star-wars {
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding: 0.875rem 1rem;
+      gap: 0.75rem;
+    }
+    
+    .nav-star-wars::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .nav-star-wars button {
+      flex-shrink: 0;
+      padding: 1rem 2rem;
+      font-size: 0.875rem;
+      white-space: nowrap;
+    }
+  }
+
+  /* Desktop */
+  @media (min-width: 1025px) {
+    .cards-grid-responsive {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.25rem;
+      padding: 0 1.5rem;
+    }
+    
+    /* Cartas del álbum MUCHO más grandes en escritorio */
+    .album-card {
+      max-width: 200px;
+      min-height: 190px;
+    }
+    
+    /* Grid específico para el álbum con más columnas */
+    .album-grid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    /* Navegación completa y horizontal */
+    .nav-star-wars {
+      display: flex;
+      justify-content: center;
+      padding: 1rem 1.5rem;
+      gap: 1rem;
+    }
+    
+    .nav-star-wars button {
+      padding: 1.25rem 2.5rem;
+      font-size: 1rem;
+      transition: all 0.2s ease-out;
+    }
+  }
+
+  /* Ultra wide screens */
+  @media (min-width: 1440px) {
+    .cards-grid-responsive {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 0 2rem;
+    }
+    
+    /* Cartas del álbum aún más grandes */
+    .album-card {
+      max-width: 240px;
+      min-height: 220px;
+    }
+    
+    /* Grid del álbum optimizado para pantallas grandes */
+    .album-grid {
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    /* Navegación espaciosa */
+    .nav-star-wars button {
+      padding: 1.5rem 3rem;
+      font-size: 1.125rem;
+    }
+  }
+}
